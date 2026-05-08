@@ -300,12 +300,21 @@ This index should eventually be generated from frontmatter metadata. For now it 
 
 - [adr/README.md](adr/README.md) — durable decisions that support canonical architecture docs.
 - [superpowers/README.md](superpowers/README.md) — historical specs and plans, not current guidance.
+- [superpowers/plans/2026-05-08-project-initialization.md](superpowers/plans/2026-05-08-project-initialization.md) — active initialization run record for this repository.
 - [99_archive/README.md](99_archive/README.md) — evidence and retired material only.
 - [99_archive/repo/README.md](99_archive/repo/README.md) — archived repository-specific ADRs, specs, and plans.
 
 ## Related documents
 
-- [README.md](README.md) — root contributor entry point.
+- [../README.md](../README.md) — repository root contributor entry point.
+- [../AGENTS.md](../AGENTS.md) — root repository routing and directory inventory.
+- [../src/AGENTS.md](../src/AGENTS.md) — source implementation rules for the chosen stack.
+- [../src/README.md](../src/README.md) — source layout guidance.
+- [../tests/README.md](../tests/README.md) — test layout guidance.
+- [../config/README.md](../config/README.md) — configuration guidance.
+- [../bin/README.md](../bin/README.md) — CLI wrapper guidance.
+- [../diagrams/README.md](../diagrams/README.md) — diagram source guidance.
+- [../examples/README.md](../examples/README.md) — example guidance.
 - [Architecture.md](Architecture.md) — explains the shape of the docs system.
 - [00-source-of-truth.md](00-source-of-truth.md) — maps concerns to owners.
 - [00_operating_model/01_lifecycle_map.md](00_operating_model/01_lifecycle_map.md) — defines lifecycle phases used above.

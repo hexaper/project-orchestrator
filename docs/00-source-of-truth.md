@@ -38,6 +38,7 @@ Use this file to find the one active document or landing page that owns a topic.
 | Frontmatter schema | [00_operating_model/04_frontmatter_schema.md](00_operating_model/04_frontmatter_schema.md) | Defines valid frontmatter keys, enums, and validation behavior. |
 | Governance | [00_governance/README.md](00_governance/README.md) | Owns governance, controls, and traceability documents. |
 | Project brief template | [00_governance/00_project_brief_TEMPLATE.md](00_governance/00_project_brief_TEMPLATE.md) | Starter template for project framing, stakeholders, constraints, and success measures. |
+| Active project brief | [00_governance/00_project_brief.md](00_governance/00_project_brief.md) | Active project framing, stakeholders, constraints, and success measures for project--orchestrator. |
 | Requirements traceability template | [00_governance/12_requirements_traceability_matrix_TEMPLATE.md](00_governance/12_requirements_traceability_matrix_TEMPLATE.md) | Starter template for requirement-to-design-to-verification linking. |
 | Strategy | [01_strategy/README.md](01_strategy/README.md) | Owns strategic framing, priorities, and direction. |
 | Product | [02_product/README.md](02_product/README.md) | Owns scope, requirements, journeys, and acceptance framing. |

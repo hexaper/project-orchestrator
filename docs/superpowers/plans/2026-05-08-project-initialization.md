@@ -32,7 +32,7 @@ Initialize project--orchestrator as an internal AI-centric tooling repository.
 | 3. Design | done | 2026-05-08 |
 | 4. Govern & Operate | done | 2026-05-08 |
 | 5. Adapt | done | 2026-05-08 |
-| 6. Final review | pending | |
+| 6. Final review | done | 2026-05-08 |
 
 ## Artifact Roadmap
 
@@ -150,6 +150,8 @@ none
 - .gitignore
 - README.md
 - AGENTS.md
+- docs/INDEX.md
+- docs/00-source-of-truth.md
 - bin/README.md
 - diagrams/README.md
 - examples/README.md
@@ -172,10 +174,14 @@ none
 - [fixed — Phase 4] important: Phase 4 governance/testing decisions and files-updated traceability were missing from plan
 - [fixed — Phase 5] important: language/runtime, testing stack, package manager, and CI choices were unresolved for adaptation
 - [fixed — Phase 5] important: repository entry surfaces still used template-centric wording instead of project-specific guidance
+- [fixed — Phase 6] important: docs index did not expose all active canonical docs and repo guidance surfaces required for final reachability
+- [fixed — Phase 6] important: PRD linked to solution design template instead of active solution design
+- [fixed — Phase 6] important: solution design still described runtime choice as unresolved after Adapt completed
+- [fixed — Phase 6] important: source-of-truth map did not include the active project brief
 
 ## Next Recommended Step
 
-Run `/init` to continue to Phase 6 (Final review).
+Project initialization is complete.
 
 ## Resume Context
 
