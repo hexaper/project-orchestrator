@@ -1,0 +1,42 @@
+name: Docs Auto-fix
+
+# Runs markdownlint --fix on every PR and auto-commits the result back to the
+# PR branch so that mechanical lint violations never block a merge.
+# Only runs on PRs from the same repository (not forks) to keep write access safe.
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "**/*.md"
+      - ".markdownlint-cli2.yaml"
+      - ".markdownlint.json"
+
+jobs:
+  markdownlint-fix:
+    # Skip forks — they don't have write access to push fixes back.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run markdownlint --fix
+        run: npx -y markdownlint-cli2 --fix || true
+
+      - name: Commit fixes (if any)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(docs): apply markdownlint auto-fixes"
+          file_pattern: "**/*.md"

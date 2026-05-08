@@ -1,0 +1,88 @@
+# Polyglot baseline generated from widely-used GitHub/gitignore patterns
+# Assistant-native tracked tooling keeps only machine-specific files ignored
+.claude/settings.local.json
+.opencode/node_modules/
+.opencode/package.json
+.opencode/package-lock.json
+.opencode/bun.lock
+.opencode/memory/
+.opencode/instructions/
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+# Editor/IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+.github/prompts
+# Logs and runtime artifacts
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Dependency directories
+node_modules/
+.pnpm-store/
+
+# Build/dist caches and outputs
+dist/
+build/
+out/
+target/
+coverage/
+.cache/
+.tmp/
+tmp/
+temp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.venv/
+venv/
+
+# Java/JVM
+*.class
+*.jar
+*.war
+*.ear
+.gradle/
+
+# Go
+bin/
+*.test
+
+# Rust
+target/
+
+# .NET
+bin/
+obj/
+
+# Template exceptions
+!/bin/
+!/bin/README.md
+
+# Swift/Xcode
+DerivedData/
+*.xcworkspace/
+*.xcuserstate

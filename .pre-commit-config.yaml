@@ -1,0 +1,46 @@
+# Pre-commit hooks for automatic docs/Markdown alignment.
+#
+# Setup (once per clone):
+#   pip install pre-commit
+#   pre-commit install
+#
+# The markdownlint hook auto-fixes staged .md files.
+# The lychee and docs-validator hooks are detection-only; they report
+# errors so authors fix them before committing.
+#
+# Requirements for lychee hook:
+#   lychee must be available on PATH (https://lychee.cli.rs)
+#
+# Requirements for docs-validator hook:
+#   pip install -e ./tools/docs_validator
+
+repos:
+  # ── markdownlint-cli2 (auto-fix) ──────────────────────────────────────────
+  - repo: local
+    hooks:
+      - id: markdownlint-fix
+        name: markdownlint (auto-fix)
+        language: node
+        entry: markdownlint-cli2 --fix
+        files: \.md$
+        additional_dependencies: ["markdownlint-cli2@0.17.2"]
+
+  # ── lychee offline link check (detect only) ───────────────────────────────
+  - repo: local
+    hooks:
+      - id: lychee-offline
+        name: lychee (offline link check)
+        language: system
+        entry: lychee --config lychee.toml --offline --no-progress
+        files: \.md$
+        pass_filenames: true
+
+  # ── docs-validator frontmatter (detect only) ──────────────────────────────
+  - repo: local
+    hooks:
+      - id: docs-validator
+        name: docs-validator (frontmatter schema)
+        language: system
+        entry: python -m docs_validator.cli
+        files: \.md$
+        pass_filenames: true

@@ -1,0 +1,100 @@
+name: Docs Staleness Report
+
+# Runs a weekly check for documentation past its review cadence threshold.
+# Opens a GitHub issue listing stale files so the team can update them.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Every Monday at 07:00 UTC
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  staleness-report:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install docs validator
+        run: python -m pip install -e "./tools/docs_validator"
+
+      - name: Run staleness check
+        id: staleness
+        run: |
+          set +e
+          OUTPUT=$(python -m docs_validator.cli \
+            --strict-staleness \
+            docs/README.md \
+            docs/Architecture.md \
+            docs/00-documentation-standards.md \
+            docs/00-source-of-truth.md \
+            docs/INDEX.md \
+            docs/_examples \
+            docs/00_operating_model \
+            docs/00_governance \
+            docs/01_strategy \
+            docs/02_product \
+            docs/03_architecture \
+            docs/04_ai_governance \
+            docs/05_testing_acceptance \
+            docs/06_security_operations \
+            docs/07_delivery \
+            docs/08_references \
+            docs/09_user_documentation \
+            docs/adr 2>&1)
+          EXIT_CODE=$?
+          echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+          # Write output to a file so the issue step can read it.
+          printf '%s\n' "$OUTPUT" > /tmp/staleness-output.txt
+          cat /tmp/staleness-output.txt
+
+      - name: Create or update stale-docs issue
+        if: steps.staleness.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[docs] Stale documentation detected"
+          LABEL="documentation"
+          STALE_LIST=$(cat /tmp/staleness-output.txt)
+          BODY=$(cat <<EOF
+          The following documents are past their review cadence threshold (checked on $(date -u '+%Y-%m-%d')):
+
+          \`\`\`
+          ${STALE_LIST}
+          \`\`\`
+
+          **Run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          Please review and update the \`last_reviewed\` frontmatter field. Use \`scripts/bump-last-reviewed.py\` to update dates automatically after reviewing.
+          EOF
+          )
+
+          EXISTING=$(gh issue list --state open --label "$LABEL" --search "$TITLE" --json number --jq '.[0].number // empty')
+
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+            echo "Updated existing issue #$EXISTING"
+          else
+            gh issue create --title "$TITLE" --body "$BODY" --label "$LABEL"
+          fi
+
+      - name: Close stale-docs issue if all docs are fresh
+        if: steps.staleness.outputs.exit_code == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="[docs] Stale documentation detected"
+          LABEL="documentation"
+          EXISTING=$(gh issue list --state open --label "$LABEL" --search "$TITLE" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" --comment "All documents are within their review cadence as of $(date -u '+%Y-%m-%d'). Closing."
+            echo "Closed issue #$EXISTING"
+          fi

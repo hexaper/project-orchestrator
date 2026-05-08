@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+# SessionStart hook for superpowers plugin
+
+set -euo pipefail
+
+# Determine plugin root directory
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+
+# Check if legacy skills directory exists and build warning
+warning_message=""
+legacy_skills_dir="${HOME}/.config/superpowers/skills"
+if [ -d "$legacy_skills_dir" ]; then
+    warning_message="\n\n<important-reminder>IN YOUR FIRST REPLY AFTER SEEING THIS MESSAGE YOU MUST TELL THE USER:⚠️ **WARNING:** Repo-native Codex skills now live in .agents/skills. Custom skills in ~/.config/superpowers/skills will not be read. Move custom skills into the current repository's .agents/skills directory or another supported Codex skills location. To make this message go away, remove ~/.config/superpowers/skills</important-reminder>"
+fi
+
+# Read using-superpowers content
+using_superpowers_skill_path="${REPO_ROOT}/.agents/skills/using-superpowers/SKILL.md"
+if [ ! -f "$using_superpowers_skill_path" ]; then
+    using_superpowers_skill_path="${PLUGIN_ROOT}/skills/using-superpowers/SKILL.md"
+fi
+using_superpowers_content=$(cat "$using_superpowers_skill_path" 2>&1 || echo "Error reading using-superpowers skill")
+
+# Escape string for JSON embedding using bash parameter substitution.
+# Each ${s//old/new} is a single C-level pass - orders of magnitude
+# faster than the character-by-character loop this replaces.
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+find_init_plan() {
+    local plans_dir="${REPO_ROOT}/docs/superpowers/plans"
+    [ -d "$plans_dir" ] || return 0
+
+    python3 - "$plans_dir" <<'PY'
+from pathlib import Path
+import sys
+
+plans_dir = Path(sys.argv[1])
+matches = sorted(plans_dir.glob('*-project-initialization.md'))
+if matches:
+    print(matches[0])
+PY
+}
+
+build_init_status_message() {
+    local plan_path="$1"
+    [ -n "$plan_path" ] || return 0
+
+    python3 - "$plan_path" <<'PY'
+from pathlib import Path
+import re
+import sys
+
+path = Path(sys.argv[1])
+if not path.exists():
+    raise SystemExit(0)
+
+text = path.read_text()
+phase_block_match = re.search(r"## Phase Roadmap\n\n((?:\|.*\n)+)", text)
+if not phase_block_match:
+    raise SystemExit(0)
+
+rows = []
+for line in phase_block_match.group(1).splitlines():
+    if not line.startswith('| ') or line.startswith('| ---'):
+        continue
+    parts = [part.strip() for part in line.strip('|').split('|')]
+    if len(parts) != 3 or parts[0] == 'Phase':
+        continue
+    rows.append(parts)
+
+if not rows:
+    raise SystemExit(0)
+
+next_index = next((i for i, row in enumerate(rows) if row[1] != 'done'), None)
+if next_index is None:
+    raise SystemExit(0)
+
+date_match = re.search(r'(\d{4}-\d{2}-\d{2})-project-initialization\.md$', path.name)
+plan_date = date_match.group(1) if date_match else path.name
+lines = [f'Project initialization — {plan_date}']
+for idx, (phase, status, notes) in enumerate(rows):
+    label = phase.split('. ', 1)[1]
+    if idx < next_index:
+        suffix = notes or ''
+        lines.append(f'  ✓ {phase:<8} {label:<15} done  {suffix}'.rstrip())
+    elif idx == next_index:
+        lines.append(f'  ▶ {phase:<8} {label:<15} next')
+    else:
+        lines.append(f'    {phase:<8} {label}')
+
+phase, _, notes = rows[next_index]
+label = phase.split('. ', 1)[1]
+summary = notes if notes else 'continue the initialization workflow'
+lines.extend(['', f'Next action: run {phase} — {label} ({summary}).', '', 'Run /init to continue.'])
+print('\n'.join(lines))
+PY
+}
+
+using_superpowers_escaped=$(escape_for_json "$using_superpowers_content")
+warning_escaped=$(escape_for_json "$warning_message")
+plan_path="$(find_init_plan || true)"
+init_status_message="$(build_init_status_message "$plan_path" || true)"
+
+session_context="<EXTREMELY_IMPORTANT>\nYou have superpowers.\n\n**Below is the full content of your 'superpowers:using-superpowers' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_superpowers_escaped}\n\n${warning_escaped}"
+
+if [ -n "$init_status_message" ]; then
+  init_status_escaped=$(escape_for_json "$init_status_message")
+  session_context="${session_context}\n\n<project-init-status>${init_status_escaped}</project-init-status>"
+fi
+
+session_context="${session_context}\n</EXTREMELY_IMPORTANT>"
+
+# Output context injection as JSON.
+# Cursor hooks expect additional_context (snake_case).
+# Claude Code hooks expect hookSpecificOutput.additionalContext (nested).
+# Copilot CLI (v1.0.11+) and others expect additionalContext (top-level, SDK standard).
+# Claude Code reads BOTH additional_context and hookSpecificOutput without
+# deduplication, so we must emit only the field the current platform consumes.
+#
+# Uses printf instead of heredoc to work around bash 5.3+ heredoc hang.
+# See: https://github.com/obra/superpowers/issues/571
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  # Cursor sets CURSOR_PLUGIN_ROOT (may also set CLAUDE_PLUGIN_ROOT)
+  printf '{\n  "additional_context": "%s"\n}\n' "$session_context"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ]; then
+  # Claude Code sets CLAUDE_PLUGIN_ROOT without COPILOT_CLI
+  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+else
+  # Copilot CLI (sets COPILOT_CLI=1) or unknown platform — SDK standard format
+  printf '{\n  "additionalContext": "%s"\n}\n' "$session_context"
+fi
+
+exit 0

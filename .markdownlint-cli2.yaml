@@ -1,0 +1,32 @@
+config:
+  MD013: false
+  MD032: false
+  MD025:
+    front_matter_title: "^\\s*title\\s*[:=]"
+  MD029:
+    style: one_or_ordered
+  MD024:
+    siblings_only: true
+  MD060: false
+  MD033: false
+  MD041: false
+globs:
+  - "**/*.md"
+ignores:
+  - ".tmp/**"
+  - ".agents/skills/**"
+  - ".claude/agents/**"
+  - ".claude/skills/**"
+  - ".codex/agents/**"
+  - ".codex/skills/**"
+  - ".copilot/agents/**"
+  - ".copilot/skills/**"
+  - ".opencode/agents/**"
+  - ".opencode/node_modules/**"
+  - ".opencode/skills/**"
+  - "node_modules/**"
+  - ".venv/**"
+  - "docs/superpowers/**"
+  - "docs/99_archive/**"
+  - "tools/docs_validator/tests/fixtures/**"
+  - "**/CHANGELOG.md"

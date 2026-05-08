@@ -1,0 +1,120 @@
+name: Docs Validation
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "**/*.md"
+      - "tools/docs_validator/**"
+      - ".github/workflows/docs.yml"
+      - ".github/workflows/ci.yml"
+      - ".markdownlint-cli2.yaml"
+      - ".markdownlint.json"
+      - "lychee.toml"
+  pull_request:
+    paths:
+      - "**/*.md"
+      - "tools/docs_validator/**"
+      - ".github/workflows/docs.yml"
+      - ".github/workflows/ci.yml"
+      - ".markdownlint-cli2.yaml"
+      - ".markdownlint.json"
+      - "lychee.toml"
+  merge_group:
+
+jobs:
+  frontmatter-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install docs validator
+        run: python -m pip install -e "./tools/docs_validator[dev]"
+
+      - name: Run validator tests
+        run: python -m pytest -q tools/docs_validator/tests
+
+      - name: Run docs validator on canonical docs
+        run: |
+          python -m docs_validator.cli \
+            docs/README.md \
+            docs/Architecture.md \
+            docs/00-documentation-standards.md \
+            docs/00-source-of-truth.md \
+            docs/INDEX.md \
+            docs/_examples \
+            docs/00_operating_model \
+            docs/00_governance \
+            docs/01_strategy \
+            docs/02_product \
+            docs/03_architecture \
+            docs/04_ai_governance \
+            docs/05_testing_acceptance \
+            docs/06_security_operations \
+            docs/07_delivery \
+            docs/08_references \
+            docs/09_user_documentation \
+            docs/adr
+
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run markdownlint
+        run: npx -y markdownlint-cli2
+
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --config lychee.toml --offline --no-progress './**/*.md'
+          fail: true
+
+  adr-coverage-report:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install docs validator
+        run: python -m pip install -e "./tools/docs_validator[dev]"
+
+      - name: Report orphan ADRs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from docs_validator.checks.adr_coverage import find_orphan_adrs
+
+          docs_root = Path("docs")
+          orphans = find_orphan_adrs(docs_root, docs_root / "adr")
+          if not orphans:
+              print("No orphan ADRs found.")
+          else:
+              print("Orphan ADRs:")
+              for path in orphans:
+                  print(f"- {path}")
+          PY

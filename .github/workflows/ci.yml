@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  merge_group:
+
+jobs:
+  repository-policy-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validate required governance files
+        run: |
+          test -f README.md
+          test -f AGENTS.md
+          test -f CONTRIBUTING.md
+          test -f SECURITY.md
+          test -f CHANGELOG.md
+          test -f LICENSE
+          test -f .github/CODEOWNERS
+          test -f docs/00-source-of-truth.md
+          test -f docs/adr/ADR-000-template.md
+          test -f project-initialization/README.md
+          test -f project-initialization/AGENTS.md
+          test -f project-initialization/contract.md
+          test -f project-initialization/plan-template.md
+          test -f project-initialization/review-checklist.md
+      - name: Validate consolidated init workflow parity
+        run: python3 scripts/check-init-parity.py
+      - name: Validate canonical path consistency
+        run: |
+          ! rg -n --glob '!.github/workflows/ci.yml' "docs/project/adr|docs/project/AGENTS|REPOSTORY_MAP|REPOSITORY_MAP" README.md AGENTS.md CONTRIBUTING.md .github diagrams src tests config scripts bin examples docs/README.md docs/INDEX.md docs/00-documentation-standards.md docs/00-source-of-truth.md docs/Architecture.md docs/00_operating_model docs/00_governance docs/01_strategy docs/02_product docs/03_architecture docs/04_ai_governance docs/05_testing_acceptance docs/06_security_operations docs/07_delivery docs/08_references docs/09_user_documentation docs/adr docs/superpowers docs/99_archive
+      - name: Validate LICENSE is set when README declares one
+        run: |
+          if grep -q "^License:" README.md; then
+            if grep -qF "REPLACE WITH YOUR CHOSEN LICENSE" LICENSE; then
+              echo "ERROR: README declares a License but LICENSE file is still the template placeholder."
+              exit 1
+            fi
+          fi
+
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run actionlint
+        uses: reviewdog/action-actionlint@v1
+        with:
+          fail_level: error

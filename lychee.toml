@@ -1,0 +1,31 @@
+accept = [200, 206, 301, 302, 304, 308, 403, 429]
+timeout = 20
+max_cache_age = "7d"
+
+exclude = [
+  "^mailto:",
+  "^https?://localhost",
+  "^https?://127\\.0\\.0\\.1",
+  "^https?://10\\.",
+  "^https?://192\\.168\\.",
+  "^https?://172\\.(1[6-9]|2[0-9]|3[0-1])\\.",
+]
+
+exclude_path = [
+  ".tmp",
+  ".agents/skills",
+  ".claude/agents",
+  ".claude/skills",
+  ".codex/agents",
+  ".codex/skills",
+  ".copilot/agents",
+  ".copilot/skills",
+  ".opencode/agents",
+  ".opencode/node_modules",
+  ".opencode/skills",
+  "node_modules",
+  ".venv",
+  "tools/docs_validator/tests/fixtures",
+  "docs/99_archive",
+  "docs/superpowers",
+]

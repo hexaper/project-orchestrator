@@ -1,0 +1,9 @@
+# Default ownership
+* @maintainers
+
+# Governance and policy owners
+/docs/ @maintainers
+/docs/superpowers/ @maintainers
+/AGENTS.md @maintainers
+/CONTRIBUTING.md @maintainers
+/SECURITY.md @maintainers
