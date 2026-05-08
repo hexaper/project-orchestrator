@@ -1,11 +1,8 @@
 # examples
 
-Purpose: Usage examples and sample assets.
+Purpose: practical TypeScript-oriented examples of workflow usage, adapter behavior, and validation expectations.
 
-This directory is a slot. The [project-initialization Adapt phase](../project-initialization/phases/5-adapt.md) may populate or remove it depending on the chosen project type — services and applications often skip it; libraries and CLIs typically keep it.
-
-Template default:
-
-- Add examples only for implemented features.
-- Keep examples runnable or copyable; delete stale examples quickly.
-- Remove this folder if your chosen stack does not need it.
+- Add examples only when they map to implemented workflow behavior.
+- Prefer examples such as command transcripts, adapter interaction samples, and validation flows that match local-first CLI behavior.
+- Keep each example tied to a canonical document or accepted ADR.
+- Remove stale examples immediately when workflow contracts or commands change.

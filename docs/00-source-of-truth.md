@@ -53,7 +53,9 @@ Use this file to find the one active document or landing page that owns a topic.
 | RFC template | [03_architecture/rfcs/RFC-000-template.md](03_architecture/rfcs/RFC-000-template.md) | Starter template for design proposals before they become ADRs. |
 | AI governance | [04_ai_governance/README.md](04_ai_governance/README.md) | Owns model-use policy, approvals, evaluation, and oversight. |
 | AI use policy template | [04_ai_governance/01_ai_use_policy_TEMPLATE.md](04_ai_governance/01_ai_use_policy_TEMPLATE.md) | Starter template for AI approved use, restrictions, approval workflow, and oversight. |
+| Active AI use policy | [04_ai_governance/01_ai_use_policy.md](04_ai_governance/01_ai_use_policy.md) | Active governance policy for approved AI use, restrictions, and approvals for project--orchestrator. |
 | Testing and acceptance | [05_testing_acceptance/README.md](05_testing_acceptance/README.md) | Owns verification, acceptance, and quality evidence structure. |
+| Active test strategy | [05_testing_acceptance/01_test_strategy.md](05_testing_acceptance/01_test_strategy.md) | Active testing and quality-gate strategy for documentation workflow acceptance. |
 | Security and operations | [06_security_operations/README.md](06_security_operations/README.md) | Owns security controls, runbooks, and incident handling. |
 | Runbook index template | [06_security_operations/10_runbook_index_TEMPLATE.md](06_security_operations/10_runbook_index_TEMPLATE.md) | Central pointer list for component or service runbooks. |
 | Per-runbook template | [06_security_operations/11_runbook_TEMPLATE.md](06_security_operations/11_runbook_TEMPLATE.md) | Starter template for a single operational procedure or on-call runbook. |

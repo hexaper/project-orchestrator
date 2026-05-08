@@ -30,8 +30,8 @@ Initialize project--orchestrator as an internal AI-centric tooling repository.
 | 1. Intent | done | 2026-05-08 |
 | 2. Specification | done | 2026-05-08 |
 | 3. Design | done | 2026-05-08 |
-| 4. Govern & Operate | pending | |
-| 5. Adapt | pending | |
+| 4. Govern & Operate | done | 2026-05-08 |
+| 5. Adapt | done | 2026-05-08 |
 | 6. Final review | pending | |
 
 ## Artifact Roadmap
@@ -45,14 +45,14 @@ Initialize project--orchestrator as an internal AI-centric tooling repository.
 | 2 | journeys | done | interview | interview | docs/02_product/03_user_journeys.md | |
 | 2 | acceptance-catalog | skipped | skipped | skipped | docs/02_product/05_acceptance_catalog.md | |
 | 3 | solution-design | done | interview | interview | docs/03_architecture/01_solution_design.md | |
-| 3 | adr | done | interview | interview | docs/adr/ADR-NNN-<decision-slug>.md | |
+| 3 | adr | done | interview | interview | docs/adr/ADR-003-modular-monolith-architecture.md; docs/adr/ADR-004-markdown-as-canonical-state-store.md; docs/adr/ADR-005-local-first-cli-runtime.md; docs/adr/ADR-006-phase-gate-and-plan-update-invariants.md | |
 | 3 | c4 | skipped | skipped | skipped | docs/03_architecture/c4/*.mmd | |
-| 4 | ai-use-policy | pending | interview | interview | docs/04_ai_governance/01_ai_use_policy.md | |
-| 4 | test-strategy | pending | interview | interview | docs/05_testing_acceptance/01_test_strategy.md | |
+| 4 | ai-use-policy | done | interview | interview | docs/04_ai_governance/01_ai_use_policy.md | 2026-05-08 |
+| 4 | test-strategy | done | interview | interview | docs/05_testing_acceptance/01_test_strategy.md | 2026-05-08 |
 | 4 | security-baseline | skipped | skipped | skipped | docs/06_security_operations/01_security_baseline.md | |
 | 4 | delivery-plan | skipped | skipped | skipped | docs/07_delivery/01_delivery_plan.md | |
-| 5 | language-adaptation | pending | interview | interview | src/, tests/, config/, .gitignore, .editorconfig, src/AGENTS.md | |
-| 5 | repo-sync | pending | extract | extract | README.md, AGENTS.md, bin/README.md, diagrams/README.md, examples/README.md | |
+| 5 | language-adaptation | done | interview | interview | src/, tests/, config/, .gitignore, .editorconfig, src/AGENTS.md | 2026-05-08 |
+| 5 | repo-sync | done | extract | extract | README.md, AGENTS.md, bin/README.md, diagrams/README.md, examples/README.md | 2026-05-08 |
 
 ## Project Facts
 
@@ -62,6 +62,19 @@ Initialize project--orchestrator as an internal AI-centric tooling repository.
 - AI involvement: core (AI model behavior is central to the product).
 - Regulatory posture: none (standard software product).
 - Team shape: solo.
+- Naming decision: keep project--orchestrator unchanged for now.
+- Workflow scope: provide a full end-to-end workflow to generate complete project documentation.
+- Input expectation: workflow accepts company and project context as user-provided input.
+- Output expectation: structured, decision-complete documentation with no open items and no revisit loops unless a major change is introduced.
+- Major-change policy: significant changes are handled as a mini-project.
+- Assistant ecosystem expectation: Claude, Copilot, Codex, and OpenCode should be interchangeable, with the best option still under evaluation.
+- UX constraint: workflow should remain friendly and guided for non-expert users.
+- Governance constraint: strict review gates are mandatory and cannot be bypassed without documented exception handling.
+- Reference runtime decision: Node.js 22+ with TypeScript.
+- Framework style decision: prompt-driven instruction executor with adapter modules and contract-first boundaries.
+- Test framework decision: Vitest.
+- Package manager decision: npm/pnpm.
+- CI decision: GitHub Actions for linting, formatting, link checks, and documentation drift controls.
 
 ## Future-Phase Facts
 
@@ -69,10 +82,11 @@ Initialize project--orchestrator as an internal AI-centric tooling repository.
 
 - (captured during Phase 1, 2026-05-08): "It aims to guide the user in creating comprehensive project documentation and streamline the process with best-practice outputs."
 - (captured during Phase 1, 2026-05-08): "Documentation should pass strict acceptance gates before implementation planning starts."
+- (captured during Phase 0, 2026-05-08): "Output quality bar is decision-complete documentation with no open items and no revisit unless there is a major change."
 - (captured during Phase 2, 2026-05-08): "Root cause is absence of stable, repeatable process for completeness — not user incompetence."
 - (captured during Phase 2, 2026-05-08): "Differentiator: bundled repository scaffold + doc templates + conversational AI-guided execution in one seamless package."
 - (captured during Phase 2, 2026-05-08): "Speed-to-usability is a priority; author is also primary user."
-- (captured during Phase 2, 2026-05-08): "Out of scope: code generation for production software; eliminating human review in governance decisions; template customization (Phase 2+)."
+- (captured during Phase 2, 2026-05-08): "Out of scope for this release: code generation for production software; eliminating human review in governance decisions; template customization (deferred to a later release)."
 
 ### Phase 3 — solution-design
 
@@ -88,6 +102,12 @@ Initialize project--orchestrator as an internal AI-centric tooling repository.
 
 - (captured during Phase 3, 2026-05-08): "Test strategy should include adapter conformance scenarios across agent ecosystems and resumability checks for interrupted runs."
 - (captured during Phase 3, 2026-05-08): "Review gating must verify no unresolved critical/important findings before phase closure."
+- (captured during Phase 4, 2026-05-08): "Primary validation approach is real-project documentation runs from start to finish."
+- (captured during Phase 4, 2026-05-08): "Automated CI checks include markdown lint, docs schema/frontmatter validation, link checks, consistency checks, and scripted review-agent checks."
+- (captured during Phase 4, 2026-05-08): "Final acceptance remains human-reviewed, with agent collaboration grounded in standards and document evidence."
+- (captured during Phase 4, 2026-05-08): "PR merge requires full documentation validation so only standards-compliant current-best docs land in main."
+- (captured during Phase 4, 2026-05-08): "Implementation planning is blocked until complete and traceable end-to-end documentation workflow knowledge is accepted."
+- (captured during Phase 4, 2026-05-08): "AI testing is cost-constrained; workflow and checks should be optimized for token usage."
 
 ### Phase 4 — security-baseline
 
@@ -96,10 +116,14 @@ Initialize project--orchestrator as an internal AI-centric tooling repository.
 ### Phase 5 — language-adaptation
 
 - (captured during Phase 3, 2026-05-08): "Support tooling language remains open between Python and JavaScript/TypeScript, but adapter contract must stay runtime-agnostic."
+- (captured during Phase 4, 2026-05-08): "Language adaptation should include low-cost deterministic checks first and targeted high-cost agent checks to control token spend."
+- (captured during Phase 4, 2026-05-08): "Model/runtime choices should be compared with quality-per-token evidence during adaptation."
+- (captured during Phase 0, 2026-05-08): "Claude, Copilot, Codex, and OpenCode should remain interchangeable while the best option is evaluated."
 
 ### Phase 5 — repo-sync
 
 - (captured during Phase 1, 2026-05-08): "The app should be based on this repository and its documentation templates."
+- (captured during Phase 0, 2026-05-08): "Workflow goal is complete end-to-end documentation generation from provided company/project context."
 
 ## Open Questions For Current Phase
 
@@ -111,20 +135,24 @@ none
 
 ## Concerns And Recommendations
 
-- **Concern (Phase 3, 2026-05-08):** The implementation language/framework remains undecided while cross-agent portability is a core requirement.
-	- **Why it matters here:** Language choices shape adapter boundaries, testing approach, and maintenance cost in a small-team environment.
-	- **Stronger option:** Commit in Phase 5 to one reference runtime for core adapter implementation and keep the workflow contract language-agnostic.
-	- **Trade-off:** Faster implementation focus now may reduce early parity across secondary runtimes.
-	- **Acceptable if intentional:** yes, if the contract-first adapter boundary remains explicit and portability checks are added to test strategy.
+- **Concern (Phase 4, 2026-05-08):** AI-agent evaluation depth is constrained by runtime cost.
+	- **Why it matters here:** Insufficient high-value review coverage can allow alignment and quality regressions across documentation artifacts.
+	- **Stronger option:** Enforce tiered validation where deterministic checks run first and budgeted agent reviews target highest-risk areas.
+	- **Trade-off:** Some low-risk areas may receive less frequent deep AI review.
+	- **Acceptable if intentional:** yes, if cost-aware coverage thresholds and escalation triggers are documented and followed.
 
 ## Files Updated This Run
 
-- docs/03_architecture/01_solution_design.md
-- docs/adr/ADR-003-modular-monolith-architecture.md
-- docs/adr/ADR-004-markdown-as-canonical-state-store.md
-- docs/adr/ADR-005-local-first-cli-runtime.md
-- docs/adr/INDEX.md
-- docs/00-source-of-truth.md
+- src/AGENTS.md
+- src/README.md
+- tests/README.md
+- config/README.md
+- .gitignore
+- README.md
+- AGENTS.md
+- bin/README.md
+- diagrams/README.md
+- examples/README.md
 - docs/superpowers/plans/2026-05-08-project-initialization.md
 
 ## Review Findings
@@ -140,14 +168,18 @@ none
 - [fixed — Phase 3] important: Phase 3 confirmed decisions and produced files were not recorded in plan
 - [fixed — Phase 3] important: source-of-truth map lacked explicit active solution design ownership
 - [fixed — Phase 3] minor: ADR-000 row in ADR index was unlinked and inconsistent with linked-row convention
+- [fixed — Phase 4] important: Phase 4 and active artifacts were pending after artifact production; reconciled to done with revisit dates
+- [fixed — Phase 4] important: Phase 4 governance/testing decisions and files-updated traceability were missing from plan
+- [fixed — Phase 5] important: language/runtime, testing stack, package manager, and CI choices were unresolved for adaptation
+- [fixed — Phase 5] important: repository entry surfaces still used template-centric wording instead of project-specific guidance
 
 ## Next Recommended Step
 
-Run `/init` to continue to Phase 4 (Govern & Operate).
+Run `/init` to continue to Phase 6 (Final review).
 
 ## Resume Context
 
-- Active phase: 3 (Design)
-- Active artifact: ai-use-policy
-- Last user input: "the ai agents skills/instuctions/agents/plugins files will be the main way direct the process, these files will be heavily used as a one complete workflow"
+- Active phase: 6 (Final review)
+- Active artifact: final-review
+- Last user input: "continue"
 - Outstanding clarifications: none

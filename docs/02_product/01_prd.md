@@ -62,23 +62,23 @@ Teams initiating software projects frequently produce incomplete or inconsistent
 
 | ID | Requirement | Priority | Acceptance reference |
 | --- | --- | --- | --- |
-| FR-001 | The system shall guide users through each documentation artifact via a structured interview, asking only relevant questions based on prior answers and captured project facts. | Must | |
-| FR-002 | The system shall enforce phase-gate acceptance criteria before marking a phase as complete, blocking progression if criteria are unmet. | Must | |
-| FR-003 | The system shall capture out-of-context facts (future-phase facts) during any artifact interview and surface them in the correct phase. | Must | |
-| FR-004 | The system shall support revisiting any completed phase or individual artifact without resetting downstream work. | Must | |
-| FR-005 | The system shall dispatch an automated reviewer at the end of each phase and apply critical and important findings before closing the run. | Must | |
-| FR-006 | The system shall produce documentation outputs that conform to this repository's template structure and frontmatter schema. | Must | |
-| FR-007 | The system shall support at least three artifact modes: interview (guided questions), confirm (validate extracted content), and extract (auto-fill from captured facts). | Should | |
-| FR-008 | The system shall maintain a persistent plan file that records phase status, artifact status, captured facts, concerns, and review findings across sessions. | Must | |
+| FR-001 | The system shall guide users through each documentation artifact via a structured interview, asking only relevant questions based on prior answers and captured project facts. | Must | [J-001 Step 3](03_user_journeys.md), [J-001 Step 5](03_user_journeys.md) |
+| FR-002 | The system shall enforce phase-gate acceptance criteria before marking a phase as complete, blocking progression if criteria are unmet. | Must | [J-003 Step 5](03_user_journeys.md), [Acceptance criteria](#acceptance-criteria) |
+| FR-003 | The system shall capture out-of-context facts (future-phase facts) during any artifact interview and surface them in the correct phase. | Must | [US-005](#user-stories), [J-001 Step 2](03_user_journeys.md) |
+| FR-004 | The system shall support revisiting any completed phase or individual artifact without resetting downstream work. | Must | [J-002 Step 5](03_user_journeys.md), [Acceptance criteria](#acceptance-criteria) |
+| FR-005 | The system shall dispatch an automated reviewer at the end of each phase and apply critical and important findings before closing the run. | Must | [J-003 Step 1](03_user_journeys.md), [J-003 Step 4](03_user_journeys.md) |
+| FR-006 | The system shall produce documentation outputs that conform to this repository's template structure and frontmatter schema. | Must | [NFR-003](#non-functional-requirements), [Acceptance criteria](#acceptance-criteria) |
+| FR-007 | The system shall support at least three artifact modes: interview (guided questions), confirm (validate extracted content), and extract (auto-fill from captured facts). | Should | [US-001](#user-stories), [J-001 Step 3](03_user_journeys.md) |
+| FR-008 | The system shall maintain a persistent plan file that records phase status, artifact status, captured facts, concerns, and review findings across sessions. | Must | [NFR-002](#non-functional-requirements), [J-001 Step 7](03_user_journeys.md) |
 
 ## Non-functional requirements
 
 | ID | Requirement | Measure or constraint | Acceptance reference |
 | --- | --- | --- | --- |
-| NFR-001 | Documentation completeness | All required frontmatter fields present; no `[TBD]` or `[NEEDS-REVIEW]` markers in any active artifact at phase gate. | |
-| NFR-002 | Workflow continuability | A session interrupted at any point must resume from the correct next step on the next `/init` invocation without data loss. | |
-| NFR-003 | Output conformance | All produced documents must pass the `docs_validator` CLI with zero errors. | |
-| NFR-004 | Differentiator completeness | Running the initialization workflow in a fresh clone with no pre-installed dependencies produces all active documentation artifacts in a single session, with no separate installation or configuration step required. | |
+| NFR-001 | Documentation completeness | All required frontmatter fields present; no `[TBD]` or `[NEEDS-REVIEW]` markers in any active artifact at phase gate. | [Acceptance criteria](#acceptance-criteria) |
+| NFR-002 | Workflow continuability | A session interrupted at any point resumes to the next incomplete phase or selected revisit target in one `/init` invocation, with no field loss in the plan file. | [J-001 Step 7](03_user_journeys.md), [J-002 Step 5](03_user_journeys.md) |
+| NFR-003 | Output conformance | All produced documents must pass the `docs_validator` CLI with zero errors. | [Acceptance criteria](#acceptance-criteria) |
+| NFR-004 | Differentiator completeness | Running the initialization workflow in a fresh clone with no pre-installed dependencies produces all active documentation artifacts in one logical run, allowing resumptions when interrupted, with no separate installation or configuration step required. | [Acceptance criteria](#acceptance-criteria), [NFR-002](#non-functional-requirements) |
 
 ## Out of scope
 
@@ -105,6 +105,6 @@ No hard external deadlines. Priority is speed-to-usability: the author is also t
 
 - [00_project_brief.md](../00_governance/00_project_brief.md) — upstream project brief this PRD extends.
 - [03_user_journeys.md](03_user_journeys.md) — user journeys for the primary user types named here.
-- [01_solution_design_TEMPLATE.md](../03_architecture/01_solution_design_TEMPLATE.md) — solution design (Phase 3, not yet produced).
+- [01_solution_design.md](../03_architecture/01_solution_design.md) — active solution design for project--orchestrator.
 - [02_requirements_catalog_TEMPLATE.md](02_requirements_catalog_TEMPLATE.md) — requirements catalog template for future expansion.
 - [05_acceptance_catalog_TEMPLATE.md](05_acceptance_catalog_TEMPLATE.md) — acceptance catalog template for detailed scenarios.

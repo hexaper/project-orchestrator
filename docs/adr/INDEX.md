@@ -26,6 +26,7 @@ last_reviewed: 2026-05-07
 
 | ADR | Title | Status | Date | Notes |
 | --- | --- | --- | --- | --- |
+| [ADR-006](ADR-006-phase-gate-and-plan-update-invariants.md) | Phase-Gate and Plan-Update Invariants | Accepted | 2026-05-08 | Makes phase-gate blocking and one-batch plan updates binding architecture invariants. |
 | [ADR-005](ADR-005-local-first-cli-runtime.md) | Local-First CLI Runtime | Accepted | 2026-05-08 | Establishes local-first execution with adapter-compatible extension path. |
 | [ADR-004](ADR-004-markdown-as-canonical-state-store.md) | Markdown as Canonical State Store | Accepted | 2026-05-08 | Keeps plan and artifact state repository-native and portable. |
 | [ADR-003](ADR-003-modular-monolith-architecture.md) | Modular Monolith Architecture | Accepted | 2026-05-08 | Adopts modular monolith shape for v1 workflow engine. |

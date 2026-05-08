@@ -1,10 +1,10 @@
 # config
 
-Purpose: Configuration files and environment templates.
+Purpose: Configuration files for local-first TypeScript workflow execution and CI verification.
 
-Template default:
+Current guidance:
 
-- Keep configuration language/tool neutral until project choices are explicit.
+- Keep configuration explicit and environment-scoped.
 - Separate shared defaults from environment-specific overrides.
 - Commit examples and templates, not secrets.
 

@@ -44,6 +44,8 @@ out/
 target/
 coverage/
 .cache/
+.tsbuildinfo
+.eslintcache
 .tmp/
 tmp/
 temp/

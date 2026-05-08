@@ -1,23 +1,23 @@
-# Universal Repository Template
+# project--orchestrator
 
-A documentation-first project template with custom agentic tooling for a structured, repeatable path from blank repository to implementation-ready state.
+project--orchestrator is an internal initiative to guide teams through creating comprehensive, review-ready project documentation using this repository's documentation model and templates.
 
-The core principle is simple: decisions about purpose, scope, and architecture belong in active documents *before* code is written. This template creates that structure upfront — giving your codebase, docs, and AI agent context a shared foundation from day one.
+The core principle is simple: decisions about purpose, scope, and architecture belong in active documents before code is written.
 
 ## Goals
 
-- Provide a clean, consistent engineering scaffold that any project can adopt without reinventing its structure.
-- Establish a comprehensive documentation tree that AI agents can read and act on throughout the project lifecycle.
-- Remove the "how should this project be organized?" question before the first commit.
-- Deliver a single-command initialization workflow that adapts to any project type, from solo experiments to team products.
+- Guide teams through capturing project intent, scope, requirements, architecture, and governance in canonical docs before implementation.
+- Enforce a decision-complete documentation standard with explicit review gates and traceable evidence.
+- Reduce rework by removing ambiguity about what must be documented and accepted before implementation planning starts.
+- Provide one resumable initialization workflow that supports both first-pass execution and targeted revisits.
 
-## What this template gives you today
+## What this project provides
 
 | Asset | Description |
 | --- | --- |
-| `/init` command | A custom agentic tool that walks you through seven initialization phases. One command, fully resumable at any point. |
+| `/init` command | The orchestration entrypoint that runs the seven-phase documentation workflow and supports resumable progress and revisits. |
 | Documentation tree (`docs/`) | A structured, role-tagged documentation system with templates covering governance, strategy, product, architecture, testing, delivery, and operations. |
-| AI agent integration | Tracked assistant-native assets for Claude, Copilot, Codex, and OpenCode — so your AI tool has the right context from the start. |
+| AI agent integration | Tracked assistant-native assets for Claude, Copilot, Codex, and OpenCode with interoperable workflow semantics. |
 | Governance baseline | ADR system, frontmatter validator, markdown linting, and link checking included and wired to CI. |
 | Lifecycle templates | Dozens of `_TEMPLATE.md` starters across every project artifact type, with worked examples and role-based reading paths. |
 
@@ -25,18 +25,7 @@ More agentic tooling is in development — the roadmap includes commands that ha
 
 ## Initialization workflow
 
-A new project goes through seven structured phases before implementation begins. The user only needs to remember one command: `/init`.
-
-```text
-Clone
-  │
-  ▼
-/init
-  Starts Phase 0 (Triage) if no plan exists.
-  Otherwise shows status, resumes the next phase,
-  or lets the user revisit a completed phase or artifact.
-  State lives in docs/superpowers/plans/YYYY-MM-DD-project-initialization.md
-```
+The repository uses a seven-phase workflow before implementation begins. The user runs `/init` to start, continue, or revisit work. State is tracked in `docs/superpowers/plans/YYYY-MM-DD-project-initialization.md`.
 
 `/init` routes into these phases:
 
@@ -54,13 +43,9 @@ Clone
 
 Run `/init` in Claude Code, GitHub Copilot Chat, Codex, or any AI tool that supports per-project slash commands:
 
-1. Clone this repository.
-2. Run `/init` to start Phase 0 (Triage) and generate your initialization plan.
-3. Run `/init` again to continue — it resumes the next incomplete phase automatically.
-4. Use `/init <phase-or-artifact-name>` to revisit any completed phase or artifact.
-5. Replace the placeholder [`LICENSE`](LICENSE) with your chosen license before publishing.
-6. Keep machine-specific overrides local-only. The assistant directories `.claude/`, `.copilot/`, `.codex/`, and `.opencode/` are tracked template assets; only `settings.local.json` and similar machine-specific files should stay untracked.
-7. Commit the bootstrap state as one or two clean commits before starting feature work.
+1. Run `/init` to continue from the next incomplete phase in the active plan.
+2. Use `/init <phase-or-artifact-name>` to revisit a completed phase or artifact.
+3. Keep machine-specific overrides local-only. The assistant directories `.claude/`, `.copilot/`, `.codex/`, and `.opencode/` are tracked assets; only local machine overrides should stay untracked.
 
 `/init` behavior at a glance:
 
@@ -100,6 +85,6 @@ See [`project-initialization/README.md`](project-initialization/README.md) for t
 
 ## Assistant-native tooling
 
-The template ships tracked assistant-native assets in `.claude/`, `.copilot/`, `.codex/`, and `.opencode/`. Each directory contains the skills, hooks, and context files that give the corresponding AI tool a working understanding of this project's conventions without manual setup.
+The repository ships tracked assistant-native assets in `.claude/`, `.copilot/`, `.codex/`, and `.opencode/`. Each directory contains skills, hooks, and context files that keep assistants aligned to the same workflow contract.
 
-The `/init` command is the first of these agentic tools. Additional tools covering common cross-cutting development tasks are planned for future releases.
+The `/init` command is the primary orchestration surface for documentation initialization and revisit operations.

@@ -17,8 +17,9 @@ Use this file for repo-wide rules only. Read the closest deeper `AGENTS.md` befo
 
 ## Repository Structure
 
-- Root purpose: repository scaffold and governance baseline.
+- Root purpose: documentation-orchestration repository and governance baseline.
 - Main directories: `docs/`, `project-initialization/`, `.github/`, `.agents/`, `.claude/`, `.copilot/`, `.codex/`, `.opencode/`, `bin/`, `config/`, `diagrams/`, `examples/`, `scripts/`, `src/`, `tests/`.
+- Adapt scaffolding directories: `src/workflow/`, `src/contracts/`, `src/adapters/`, `src/review/`, `tests/unit/`, `tests/integration/`, `tests/e2e/`, `config/base/`, `config/environments/`.
 - Terms used in this repo: `template` is a reusable `_TEMPLATE.md` starter file, `active document` is a project-specific document that governs current work, and `historical record` is a non-canonical planning or archive document.
 - Assistant-native tooling directories `.claude/`, `.copilot/`, `.codex/`, and `.opencode/` are part of the tracked template contract. Codex also uses `.agents/skills/` as a tracked repo-native skill surface. Keep only machine-specific files inside assistant directories ignored.
 
@@ -47,7 +48,7 @@ For proposals that are not yet decided, open an RFC in `docs/03_architecture/rfc
 
 ## Global Workflow
 
-- A fresh clone of this template is unspecialized. The adoption sequence is documented in the root [`README.md`](README.md): run `/init`; it will start triage, then resume the next incomplete initialization phase on subsequent runs. Phase logic lives in [`project-initialization/`](project-initialization/README.md).
+- The repository workflow is documented in the root [`README.md`](README.md): run `/init`; it starts triage when no plan exists and otherwise resumes the next incomplete phase or revisit target. Phase logic lives in [`project-initialization/`](project-initialization/README.md).
 - Define scope before editing and avoid unrelated changes.
 - Prefer root-cause fixes and explicit, simple changes.
 - Keep `AGENTS.md` files up to date when workflow or context-management guidance changes, or when new instructions would materially improve future work.

@@ -1,11 +1,14 @@
 # src
 
-Purpose: Source location for implementation code once approved plans are ready.
+Purpose: Source location for the TypeScript workflow engine and adapter modules.
 
 Rules:
 
-- Keep code language-agnostic in this template phase.
-- Add runtime files only when explicitly requested by project scope.
-- Prefer one clear top-level package, app, or service entry per runtime.
-- Keep framework entrypoints shallow and put reusable domain logic below them.
-- Introduce shared modules only when they are genuinely reused.
+- Keep contracts and orchestration rules explicit and easy to review.
+- Keep adapter behavior separated from runtime-agnostic workflow logic.
+- Prefer narrow modules under the following folders:
+  - `workflow/` for phase and artifact orchestration.
+  - `contracts/` for shared workflow invariants.
+  - `adapters/` for assistant-specific integrations.
+  - `review/` for review dispatch and findings handling.
+- Avoid feature stubs; add implementation files only when tied to accepted plans.

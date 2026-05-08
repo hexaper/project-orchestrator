@@ -62,7 +62,7 @@ last_reviewed: 2026-05-08
 | Step | Actor | Action | Observable result |
 | --- | --- | --- | --- |
 | 1 | Project Initiator | Runs `/init` and selects `revisit` from the status menu | System renders a flat list of completed phases and their artifacts |
-| 2 | Project Initiator | Selects a specific artifact by number (e.g., `1b` for business-case) | System loads only that artifact's rubric in append/extend mode |
+| 2 | Project Initiator | Selects a specific artifact from the presented list | System loads only that artifact's rubric in append/extend mode |
 | 3 | Project Initiator | Provides updated or clarifying information | System incorporates changes into the artifact and records the session date as `Last Revisited` in the plan |
 | 4 | System | Re-evaluates the artifact against its gating criteria | Updated artifact passes gating criteria with no new unresolved markers |
 | 5 | Project Initiator | Confirms the update is complete | Plan state is updated; no other artifact or phase status is changed |

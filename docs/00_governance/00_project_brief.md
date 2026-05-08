@@ -18,9 +18,9 @@ Project `project--orchestrator` is an internal initiative to guide teams through
 
 ## Goals and success measures
 
-- Enable users to produce a complete, reviewable documentation set before implementation planning starts.
-- Enforce strict acceptance gates so documentation quality is validated before downstream phases proceed.
-- Improve planning reliability by reducing architecture churn and late-stage requirement changes caused by missing upfront context.
+- At phase-gate review, 100% of required canonical documentation artifacts are present, have valid frontmatter, and contain no unresolved required-section placeholders.
+- Before any phase is closed, there are 0 unresolved critical or important review findings.
+- Revisit loops are avoided in normal flow; re-opening completed outputs is limited to major changes handled as a mini-project.
 
 ## Scope (in/out)
 
@@ -38,6 +38,8 @@ Project `project--orchestrator` is an internal initiative to guide teams through
 
 ## Stakeholders
 
+- Primary stakeholder persona for v1: Project Initiator (solo developer, technical lead, or project manager).
+- Decision owner for scope and gate exceptions: product-owner role.
 - Software developers who initiate and execute projects.
 - Project managers and team leads responsible for planning quality and delivery readiness.
 - Reviewers and approvers who validate documentation quality and phase-gate readiness.
@@ -71,6 +73,7 @@ Project `project--orchestrator` is an internal initiative to guide teams through
 - Phase progression is controlled by documented acceptance gates and review outcomes.
 - Project-level scope and quality decisions are approved by the responsible project lead role.
 - Escalation follows the repository's governance model and decision records in the documentation tree.
+- Until a project-specific board terms document is instantiated, escalation authority references [Board Terms of Reference Template](03_board_terms_of_reference_TEMPLATE.md).
 
 ## Related documents
 

@@ -66,6 +66,7 @@ Decision references:
 - [ADR-003](../adr/ADR-003-modular-monolith-architecture.md)
 - [ADR-004](../adr/ADR-004-markdown-as-canonical-state-store.md)
 - [ADR-005](../adr/ADR-005-local-first-cli-runtime.md)
+- [ADR-006](../adr/ADR-006-phase-gate-and-plan-update-invariants.md)
 
 ## 5. Building block view
 
@@ -121,6 +122,7 @@ v1 deployment model is local-first CLI execution on contributor machines.
 - [ADR-003](../adr/ADR-003-modular-monolith-architecture.md) — Adopt modular monolith architecture.
 - [ADR-004](../adr/ADR-004-markdown-as-canonical-state-store.md) — Use Markdown files as canonical state store.
 - [ADR-005](../adr/ADR-005-local-first-cli-runtime.md) — Use local-first CLI runtime with adapter-compatible extension path.
+- [ADR-006](../adr/ADR-006-phase-gate-and-plan-update-invariants.md) — Enforce phase-gate blocking and one-batch plan updates as workflow invariants.
 
 ## 10. Quality requirements
 
@@ -129,7 +131,7 @@ Design response to PRD non-functional requirements:
 - NFR-001 Documentation completeness: Artifact Engine and Validation Layer enforce template/frontmatter conformance and marker-free phase gates.
 - NFR-002 Workflow continuability: Plan State Manager persists resumable state and active context between runs.
 - NFR-003 Output conformance: Validation Layer includes docs schema and quality checks as closure prerequisites.
-- NFR-004 Differentiator completeness: local-first deployment and integrated workflow reduce setup friction and preserve single-session usability.
+- NFR-004 Differentiator completeness: in a fresh clone, first run setup requires no manual pre-configuration steps and initialization can reach the next incomplete phase or revisit target in one command invocation after interruption.
 
 Scale assumptions for v1:
 
@@ -138,7 +140,7 @@ Scale assumptions for v1:
 
 ## 11. Risks and technical debt
 
-- Runtime-language uncertainty: support tooling language remains intentionally open pending adaptation decisions; strict core contract boundaries limit this risk.
+- Runtime implementation risk: the reference runtime is now Node.js 22+ with TypeScript, but adapter and contract boundaries must remain runtime-agnostic to preserve cross-agent portability.
 - Cross-agent drift risk: adapter behavior may diverge across ecosystems without shared conformance checks.
 - Concurrent plan edits: file-based state can conflict when multiple users edit same phase concurrently.
 - Review dependency: quality relies on reviewer availability and rubric quality.

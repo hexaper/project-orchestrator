@@ -1,6 +1,6 @@
 ---
 name: Source Coding Practices
-description: Use for work under src/. Covers code quality, implementation style, and change discipline. Most fields are slot placeholders that the language-adaptation prompt fills.
+description: Use for work under src/. Covers code quality, implementation style, and change discipline for the reference TypeScript runtime.
 applyTo: "src/**"
 ---
 
@@ -8,9 +8,7 @@ applyTo: "src/**"
 
 Apply these rules when editing files under `src/`.
 
-This file is a **slot template**. A fresh clone of the template is language-agnostic, so the placeholders below are intentionally unfilled. Run the [project-initialization Adapt phase](../project-initialization/phases/5-adapt.md) to populate them, or fill them by hand if you skip that workflow.
-
-**If you encounter unfilled `<<FILL IN at adaptation: ...>>` slots: stop. Do not guess or infer values. Inform the user that the repository has not been adapted yet and direct them to run `/init` first.**
+This file is adapted for the reference runtime selected in Phase 5.
 
 ## Most Important Rules
 
@@ -23,27 +21,52 @@ This file is a **slot template**. A fresh clone of the template is language-agno
 
 ## Commands
 
-`<<FILL IN at adaptation: build command(s)>>`
-`<<FILL IN at adaptation: test command(s)>>`
-`<<FILL IN at adaptation: lint command(s)>>`
-`<<FILL IN at adaptation: format command(s)>>`
-`<<FILL IN at adaptation: type-check command(s) if applicable>>`
+- Build: `pnpm run build` (fallback: `npm run build`)
+- Test: `pnpm run test` (fallback: `npm run test`)
+- Lint: `pnpm run lint` (fallback: `npm run lint`)
+- Format: `pnpm run format` (fallback: `npm run format`)
+- Type-check: `pnpm run typecheck` (fallback: `npm run typecheck`)
 
 ## Project structure
 
-`<<FILL IN at adaptation: where new modules, packages, or features should live; naming conventions; import boundaries>>`
+- Runtime: Node.js 22+ with TypeScript as the reference implementation stack.
+- Primary structure:
+  - `src/workflow/` for phase and artifact orchestration logic.
+  - `src/contracts/` for cross-agent workflow contracts and invariants.
+  - `src/adapters/` for assistant-specific integrations.
+  - `src/review/` for review dispatch and findings handling logic.
+- Naming: prefer `kebab-case` for filenames and clear module-level responsibilities.
+- Boundaries: core contracts stay runtime-agnostic; adapter modules translate host-specific behavior.
 
 ## Code style
 
-`<<FILL IN at adaptation: style rules specific to the chosen language; one short canonical example showing the preferred pattern>>`
+- Enable TypeScript strict mode and avoid `any` unless there is a documented boundary reason.
+- Prefer small pure functions for orchestration decisions and explicit return types for exported symbols.
+- Keep host/tool side effects in adapter modules and pass normalized data into core workflow modules.
+
+Canonical pattern:
+
+```ts
+export function resolveNextPhase(roadmap: string[]): string | undefined {
+  return roadmap.find((phase) => phase !== "done");
+}
+```
 
 ## Testing
 
-`<<FILL IN at adaptation: where tests live; framework; what to test (unit, integration, e2e); how to run a single test; coverage expectations>>`
+- Framework: Vitest.
+- Locations:
+  - `tests/unit/` for pure workflow logic and rule evaluation.
+  - `tests/integration/` for adapter and validation-layer interactions.
+  - `tests/e2e/` for end-to-end initialization flows and resumability checks.
+- Single test run: `pnpm vitest tests/unit/<file>.test.ts -t "<case>"`.
+- Coverage expectation: prioritize phase-gate logic, plan-state transitions, and adapter conformance paths before broad line-coverage targets.
 
 ## Git workflow
 
-`<<FILL IN at adaptation: commit-message format; branch naming; review and merge expectations>>`
+- Branch naming: `feature/<topic>`, `fix/<topic>`, `docs/<topic>`.
+- Commit style: imperative summary with scoped intent, for example `docs: tighten phase gate acceptance references`.
+- Merge expectation: no unresolved critical or important review findings; required validation commands must pass.
 
 ## Quality rules
 

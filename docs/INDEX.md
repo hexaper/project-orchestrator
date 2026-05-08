@@ -23,6 +23,7 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### Initiation
 
 - [00_operating_model/01_lifecycle_map.md](00_operating_model/01_lifecycle_map.md)
+- [00_governance/00_project_brief.md](00_governance/00_project_brief.md)
 - [00_governance/00_project_brief_TEMPLATE.md](00_governance/00_project_brief_TEMPLATE.md)
 - [00_governance/01_business_case_TEMPLATE.md](00_governance/01_business_case_TEMPLATE.md)
 - [00_governance/02_project_initiation_document_TEMPLATE.md](00_governance/02_project_initiation_document_TEMPLATE.md)
@@ -31,11 +32,16 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### Planning
 
 - [00_operating_model/07_tailoring_matrix.md](00_operating_model/07_tailoring_matrix.md)
+- [02_product/01_prd.md](02_product/01_prd.md)
 - [02_product/01_prd_TEMPLATE.md](02_product/01_prd_TEMPLATE.md)
+- [02_product/03_user_journeys.md](02_product/03_user_journeys.md)
 - [02_product/02_requirements_catalog_TEMPLATE.md](02_product/02_requirements_catalog_TEMPLATE.md)
+- [03_architecture/01_solution_design.md](03_architecture/01_solution_design.md)
 - [03_architecture/01_solution_design_TEMPLATE.md](03_architecture/01_solution_design_TEMPLATE.md)
 - [03_architecture/06_interface_control_document_TEMPLATE.md](03_architecture/06_interface_control_document_TEMPLATE.md)
+- [04_ai_governance/01_ai_use_policy.md](04_ai_governance/01_ai_use_policy.md)
 - [04_ai_governance/01_ai_use_policy_TEMPLATE.md](04_ai_governance/01_ai_use_policy_TEMPLATE.md)
+- [05_testing_acceptance/01_test_strategy.md](05_testing_acceptance/01_test_strategy.md)
 - [05_testing_acceptance/01_test_strategy_TEMPLATE.md](05_testing_acceptance/01_test_strategy_TEMPLATE.md)
 - [07_delivery/01_delivery_plan_TEMPLATE.md](07_delivery/01_delivery_plan_TEMPLATE.md)
 - [07_delivery/02_implementation_plan_TEMPLATE.md](07_delivery/02_implementation_plan_TEMPLATE.md)
@@ -76,6 +82,7 @@ This index should eventually be generated from frontmatter metadata. For now it 
 
 - [README.md](README.md)
 - [00_operating_model/02_role_audience_map.md](00_operating_model/02_role_audience_map.md)
+- [00_governance/00_project_brief.md](00_governance/00_project_brief.md)
 - [00_governance/00_project_brief_TEMPLATE.md](00_governance/00_project_brief_TEMPLATE.md)
 - [01_strategy/02_roadmap_TEMPLATE.md](01_strategy/02_roadmap_TEMPLATE.md)
 - [07_delivery/04_status_report_TEMPLATE.md](07_delivery/04_status_report_TEMPLATE.md)
@@ -90,6 +97,8 @@ This index should eventually be generated from frontmatter metadata. For now it 
 
 ### Product
 
+- [02_product/01_prd.md](02_product/01_prd.md)
+- [02_product/03_user_journeys.md](02_product/03_user_journeys.md)
 - [01_strategy/01_product_vision_TEMPLATE.md](01_strategy/01_product_vision_TEMPLATE.md)
 - [01_strategy/02_roadmap_TEMPLATE.md](01_strategy/02_roadmap_TEMPLATE.md)
 - [02_product/01_prd_TEMPLATE.md](02_product/01_prd_TEMPLATE.md)
@@ -98,14 +107,17 @@ This index should eventually be generated from frontmatter metadata. For now it 
 
 ### Engineer
 
+- [03_architecture/01_solution_design.md](03_architecture/01_solution_design.md)
 - [03_architecture/01_solution_design_TEMPLATE.md](03_architecture/01_solution_design_TEMPLATE.md)
 - [03_architecture/02_c4_context_TEMPLATE.md](03_architecture/02_c4_context_TEMPLATE.md)
 - [03_architecture/03_c4_container_TEMPLATE.md](03_architecture/03_c4_container_TEMPLATE.md)
 - [03_architecture/06_interface_control_document_TEMPLATE.md](03_architecture/06_interface_control_document_TEMPLATE.md)
+- [adr/INDEX.md](adr/INDEX.md)
 - [adr/README.md](adr/README.md)
 
 ### QA
 
+- [05_testing_acceptance/01_test_strategy.md](05_testing_acceptance/01_test_strategy.md)
 - [00_governance/12_requirements_traceability_matrix_TEMPLATE.md](00_governance/12_requirements_traceability_matrix_TEMPLATE.md)
 - [05_testing_acceptance/01_test_strategy_TEMPLATE.md](05_testing_acceptance/01_test_strategy_TEMPLATE.md)
 - [05_testing_acceptance/03_verification_evidence_index_TEMPLATE.md](05_testing_acceptance/03_verification_evidence_index_TEMPLATE.md)
@@ -123,6 +135,7 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### Compliance
 
 - [00_operating_model/05_audience_and_export_profiles.md](00_operating_model/05_audience_and_export_profiles.md)
+- [04_ai_governance/01_ai_use_policy.md](04_ai_governance/01_ai_use_policy.md)
 - [04_ai_governance/01_ai_use_policy_TEMPLATE.md](04_ai_governance/01_ai_use_policy_TEMPLATE.md)
 - [04_ai_governance/06_ai_risk_register_TEMPLATE.md](04_ai_governance/06_ai_risk_register_TEMPLATE.md)
 - [06_security_operations/01_security_baseline_TEMPLATE.md](06_security_operations/01_security_baseline_TEMPLATE.md)
@@ -161,6 +174,7 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### Governance
 
 - [00_governance/README.md](00_governance/README.md)
+- [00_governance/00_project_brief.md](00_governance/00_project_brief.md)
 - [00_governance/00_project_brief_TEMPLATE.md](00_governance/00_project_brief_TEMPLATE.md)
 - [00_governance/01_business_case_TEMPLATE.md](00_governance/01_business_case_TEMPLATE.md)
 - [00_governance/02_project_initiation_document_TEMPLATE.md](00_governance/02_project_initiation_document_TEMPLATE.md)
@@ -182,8 +196,10 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### Product
 
 - [02_product/README.md](02_product/README.md)
+- [02_product/01_prd.md](02_product/01_prd.md)
 - [02_product/01_prd_TEMPLATE.md](02_product/01_prd_TEMPLATE.md)
 - [02_product/02_requirements_catalog_TEMPLATE.md](02_product/02_requirements_catalog_TEMPLATE.md)
+- [02_product/03_user_journeys.md](02_product/03_user_journeys.md)
 - [02_product/03_user_journeys_TEMPLATE.md](02_product/03_user_journeys_TEMPLATE.md)
 - [02_product/04_backlog_policy_TEMPLATE.md](02_product/04_backlog_policy_TEMPLATE.md)
 - [02_product/05_acceptance_catalog_TEMPLATE.md](02_product/05_acceptance_catalog_TEMPLATE.md)
@@ -191,6 +207,7 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### Architecture
 
 - [03_architecture/README.md](03_architecture/README.md)
+- [03_architecture/01_solution_design.md](03_architecture/01_solution_design.md)
 - [03_architecture/01_solution_design_TEMPLATE.md](03_architecture/01_solution_design_TEMPLATE.md)
 - [03_architecture/02_c4_context_TEMPLATE.md](03_architecture/02_c4_context_TEMPLATE.md)
 - [03_architecture/03_c4_container_TEMPLATE.md](03_architecture/03_c4_container_TEMPLATE.md)
@@ -209,6 +226,7 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### AI governance
 
 - [04_ai_governance/README.md](04_ai_governance/README.md)
+- [04_ai_governance/01_ai_use_policy.md](04_ai_governance/01_ai_use_policy.md)
 - [04_ai_governance/01_ai_use_policy_TEMPLATE.md](04_ai_governance/01_ai_use_policy_TEMPLATE.md)
 - [04_ai_governance/02_model_card_TEMPLATE.md](04_ai_governance/02_model_card_TEMPLATE.md)
 - [04_ai_governance/03_dataset_card_TEMPLATE.md](04_ai_governance/03_dataset_card_TEMPLATE.md)
@@ -219,6 +237,7 @@ This index should eventually be generated from frontmatter metadata. For now it 
 ### Quality
 
 - [05_testing_acceptance/README.md](05_testing_acceptance/README.md)
+- [05_testing_acceptance/01_test_strategy.md](05_testing_acceptance/01_test_strategy.md)
 - [05_testing_acceptance/01_test_strategy_TEMPLATE.md](05_testing_acceptance/01_test_strategy_TEMPLATE.md)
 - [05_testing_acceptance/02_quality_plan_TEMPLATE.md](05_testing_acceptance/02_quality_plan_TEMPLATE.md)
 - [05_testing_acceptance/03_verification_evidence_index_TEMPLATE.md](05_testing_acceptance/03_verification_evidence_index_TEMPLATE.md)

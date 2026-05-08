@@ -1,11 +1,10 @@
 # bin
 
-Purpose: Entry-point scripts or binaries after implementation starts.
+Purpose: thin Node.js command wrappers for local workflow operations in the TypeScript runtime.
 
-This directory is a slot. The [project-initialization Adapt phase](../project-initialization/phases/5-adapt.md) may rename, populate, or remove it depending on the chosen stack — many languages use a different convention (Go uses `cmd/`, Rust uses `src/bin/`, Python typically has no top-level `bin/`).
+Use this directory for user-facing command entrypoints only.
 
-Template default:
-
-- Keep this folder as documentation-only until runtime artifacts are explicitly requested.
-- Prefer thin wrappers that delegate real logic to `src/`.
-- Remove this folder if your chosen stack does not need it.
+- Keep wrappers minimal and delegate behavior to modules in `src/`.
+- Prefer Node.js CLI entrypoints or package-script wrappers that invoke TypeScript workflow modules.
+- Avoid embedding orchestration logic directly in shell scripts.
+- Keep command names aligned with documentation workflow operations.
