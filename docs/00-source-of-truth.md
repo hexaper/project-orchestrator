@@ -42,8 +42,11 @@ Use this file to find the one active document or landing page that owns a topic.
 | Strategy | [01_strategy/README.md](01_strategy/README.md) | Owns strategic framing, priorities, and direction. |
 | Product | [02_product/README.md](02_product/README.md) | Owns scope, requirements, journeys, and acceptance framing. |
 | PRD template | [02_product/01_prd_TEMPLATE.md](02_product/01_prd_TEMPLATE.md) | Starter template for product problem, scope, requirements, and acceptance. |
+| Active PRD | [02_product/01_prd.md](02_product/01_prd.md) | Active product requirements for project--orchestrator. |
+| Active user journeys | [02_product/03_user_journeys.md](02_product/03_user_journeys.md) | Active user journey set for project--orchestrator. |
 | Architecture | [03_architecture/README.md](03_architecture/README.md) | Owns system design, integration boundaries, and technical patterns. |
 | Solution design template | [03_architecture/01_solution_design_TEMPLATE.md](03_architecture/01_solution_design_TEMPLATE.md) | Starter template for architecture baseline, boundaries, and quality concerns. |
+| Active solution design | [03_architecture/01_solution_design.md](03_architecture/01_solution_design.md) | Active architecture baseline for project--orchestrator. |
 | Interface control template | [03_architecture/06_interface_control_document_TEMPLATE.md](03_architecture/06_interface_control_document_TEMPLATE.md) | Starter template for contracts, interfaces, and integration boundaries. |
 | RFC index template | [03_architecture/12_rfc_index_TEMPLATE.md](03_architecture/12_rfc_index_TEMPLATE.md) | Starter index for tracking RFC proposals in a project. |
 | RFC files and process | [03_architecture/rfcs/README.md](03_architecture/rfcs/README.md) | Owns RFC lifecycle, review rules, and ADR graduation process. |
@@ -62,6 +65,7 @@ Use this file to find the one active document or landing page that owns a topic.
 | References | [08_references/README.md](08_references/README.md) | Owns external references and standards inputs. |
 | User documentation | [09_user_documentation/README.md](09_user_documentation/README.md) | Owns end-user tutorials, how-to guides, reference, explanation, changelog, and release notes. |
 | Architecture decisions | [adr/README.md](adr/README.md) | Owns durable implementation decisions and ADR authoring rules. |
+| Active ADR index | [adr/INDEX.md](adr/INDEX.md) | Canonical navigation for current ADR decisions. |
 | Working-history policy | [superpowers/README.md](superpowers/README.md) | Owns historical records for specs, plans, and tracked work. |
 | Archive policy | [99_archive/README.md](99_archive/README.md) | Owns rules for historical evidence and retired material. |
 | Assistant-native tooling contract | [../README.md](../README.md) | Owns which tracked assistant directories ship with the template and what stays local-only. |

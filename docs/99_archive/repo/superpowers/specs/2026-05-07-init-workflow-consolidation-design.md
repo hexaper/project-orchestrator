@@ -1,11 +1,11 @@
 ---
 title: Init Workflow Consolidation — Design
 status: draft
-record_class: spec
-audience: [internal, contributors]
+record_class: historical
+audience: [internal]
 owner: TBD
 capability: knowledge
-phase: design
+phase: planning
 cadence: ad-hoc
 last_reviewed: 2026-05-07
 ---

@@ -43,7 +43,7 @@ After producing all active artifacts, dispatch the `init-reviewer` agent with:
 - Phase number
 - `project-initialization/review-checklist.md`
 
-Apply all critical and important findings before closing the run. Record minor and advisory findings in `Review Findings` and continue.
+Apply all critical and important findings before closing the run. Record minor and advisory findings in `Review Findings` and run the review again until there are no critical or important findings outstanding. Do not proceed to the next phase until the current phase's artifacts meet the quality standards.
 
 ## End-of-run output format
 

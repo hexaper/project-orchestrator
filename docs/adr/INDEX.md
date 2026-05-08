@@ -26,9 +26,12 @@ last_reviewed: 2026-05-07
 
 | ADR | Title | Status | Date | Notes |
 | --- | --- | --- | --- | --- |
+| [ADR-005](ADR-005-local-first-cli-runtime.md) | Local-First CLI Runtime | Accepted | 2026-05-08 | Establishes local-first execution with adapter-compatible extension path. |
+| [ADR-004](ADR-004-markdown-as-canonical-state-store.md) | Markdown as Canonical State Store | Accepted | 2026-05-08 | Keeps plan and artifact state repository-native and portable. |
+| [ADR-003](ADR-003-modular-monolith-architecture.md) | Modular Monolith Architecture | Accepted | 2026-05-08 | Adopts modular monolith shape for v1 workflow engine. |
 | [ADR-002](../99_archive/repo/adr/ADR-002-prompt-adoption-with-tracked-assistant-tooling.md) | Prompt-Based Template Adoption with Tracked Assistant-Native Tooling | Archived | 2026-05-07 | Archived repository bootstrap ADR retained for traceability. |
 | [ADR-001](../99_archive/repo/adr/ADR-001-skill-first-template-adoption.md) | Command-First Template Adoption | Archived | 2026-05-07 | Archived repository bootstrap ADR retained for traceability. |
-| ADR-000 | Template | draft | 2026-05-07 | Starting point for new decisions |
+| [ADR-000](ADR-000-template.md) | Template | Draft | 2026-05-07 | Starting point for new decisions. |
 
 ## Status notes
 
